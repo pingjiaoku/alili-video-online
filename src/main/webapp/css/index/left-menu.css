@@ -1,0 +1,79 @@
+
+#left-menu {
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    left: 0;
+    background-color: #FFFFFF;
+    border-right: 1px solid #F0F0F0;
+    overflow-y: scroll; /*添加滚动条*/
+}
+/*滚动条样式*/
+#left-menu::-webkit-scrollbar {
+    width:5px;
+    background-color: #ffffff;
+}
+#left-menu::-webkit-scrollbar-thumb {
+    border-radius:10px;
+    background-color: #c9c9c9;
+}
+
+#logo {
+    position: absolute;
+    width: 80px;
+    height: 30px;
+    top: 20px;
+    left: 50px;
+}
+#left-menu>div{
+    position: absolute;
+    top: 60px;
+    left: 10px;
+}
+#left-menu>div>ul>li{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 40px;
+    width: 180px;
+    font-size: 15px;
+    list-style: none;
+    position: relative;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#channel>li:hover, #channel-main>li:hover{
+    background-color: #f5f5f5 !important;
+}
+
+#left-menu>div>ul>li>a {
+    position: absolute;
+    top: 10px;
+}
+
+
+
+#left-menu>div>ul>li>a>img{
+    margin-left: 10px;
+    width: 20px;
+}
+
+#left-menu>div>ul>li>a>span{
+    width: 90px;
+    position: absolute;
+    top:-1px;
+    left: 40px;
+}
+
+#channel>li>a>img{
+    width: 20px;
+}
+.channel-icon-none{
+    position: absolute;
+    right: 5px;
+    top: 10px;
+    display: none;
+}
+.channel-icon-none>img{
+    width: 15px;
+}

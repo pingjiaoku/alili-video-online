@@ -1,0 +1,39 @@
+* {
+    padding: 0;
+    margin: 0;
+    user-select: none;
+}
+hr{
+    position: relative;
+    margin:0 auto;
+    border: 0;
+    height : 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(0, 174, 236), rgba(0, 0, 0, 0));
+}
+.font-cover-change-color{
+    user-select: none;
+}
+.font-cover-change-color:hover{
+    color: #00AEEC;
+    cursor: pointer;
+}
+.cursor-pointer{
+    user-select: none;
+}
+.cursor-pointer:hover{
+    cursor: pointer;
+}
+
+
+#layer-page{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(129, 129, 129, 0.5);
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: none;
+}
+#layer-page:hover #message-box{
+    left:calc(100% - 700px) !important;
+}

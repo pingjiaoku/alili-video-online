@@ -1,0 +1,127 @@
+body{
+    overflow-y: hidden;
+}
+body>div {
+    position: relative;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+}
+
+#main {
+    position: absolute;
+    left: 200px;
+    width: calc(100% - 200px);
+    height: 100%;
+    border: none;
+    overflow-y: scroll;
+}
+
+
+#video-content{
+    width: 100%;
+    position: absolute;
+    top: 70px;
+    background-color: #FFFFFF;
+}
+.row-video{
+    width: 100%;
+}
+.row-video>li{
+    width: 25%;
+    float: left;
+    position: relative;
+    height: 0;
+    padding: 0 0 20%;
+
+}
+.intrinsic-aspect-ratio-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.cover{
+    width: 80%;
+    height: 60%;
+    border-radius: 10px;
+    left: 10%;
+    overflow: hidden;
+    position: absolute;
+    background-color: #818181;
+}
+.cover:hover{
+    border: 1px solid #FFFFFF;
+}
+.cover>img{
+    width: 100%;
+    height: 100%;
+}
+
+.video-message{
+    position: absolute;
+    top: 65%;
+    left: 10%;
+    width: 80%;
+    height: 40%;
+}
+.video-message>img{
+    width: 15%;
+    height: 38%;
+    border-radius: 50%;
+    background-color: #000000;
+}
+.video-message>img:hover{
+    animation: myani2 0.5s;
+}
+@keyframes myani2 {
+    30% {
+        width: 16%;
+        height: 40%;
+    }
+}
+.video-message>div{
+    position: absolute;
+    top:0;
+    left: 20%;
+}
+.video-title{
+    font-weight: normal;
+}
+.video-author{
+    color: #424242;
+    margin-top: 5px;
+    white-space: nowrap;
+}
+.video-author:hover, .video-title:hover{
+    color: #00AEEC;
+}
+
+.cover>div{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20%;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+}
+.cover>div>img{
+    position: absolute;
+    height: 70%;
+    bottom: 10%;
+}
+.cover>div>p, .cover>div>span{
+    position: absolute;
+    bottom: 10%;
+    color: #FFFFFF;
+    font-size: 15px;
+}
+.cover>div>p{
+    left: 10%;
+}
+.cover>div>span {
+    right: 5%;
+}
+
+
+

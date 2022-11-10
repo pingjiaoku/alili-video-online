@@ -1,0 +1,287 @@
+
+
+#video_player{
+    left: 80px;
+    position: relative;
+    top:130px;
+    width: 900px;
+    height: 580px;
+    background-color: #000000;
+    /* 溢出裁剪 */
+    overflow: hidden;
+
+    /* 选中任何元素不显示 */
+    -webkit-user-select:none;
+    user-select:none;
+}
+video, canvas{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+canvas{
+    pointer-events: none;
+}
+#controller_menu {
+    position: absolute;
+    width: 100%;
+    height: 55px;
+    text-align: center;
+    left: 0;
+    background-color: rgba(128, 126, 126, 0.5);
+    /* 设置动画时间 */
+    transition: 0.3s;
+    top: 100%;
+}
+/*******************************************/
+#send_box{
+    position: relative;
+    background-color: #dddddd;
+    border-radius: 5px;
+    font-size: 0; /* 子元素间距设置为0 */
+    width: 300px;
+    height: 35px;
+    display: inline-block; /* 设置为行内元素 */
+}
+#send_box * {
+    border:2px;
+    background-color: #dddddd;
+    height: 30px;
+    outline: none;
+}
+#send_box>input[type="text"]{
+    width: 200px;
+    font-size: 17px;
+    float: left;
+    height: 32px;
+    margin-left: 7px;
+}
+#send_box>button{
+    position: absolute;
+    background-color: #00AEEC;
+    height: 35px;
+    width: 50px;
+    right: 0;
+    border-radius: 0 5px 5px 0;
+    font-size: 17px;
+    color: #FFFFFF;
+}
+/* 颜色选择器 */
+#send_box>input[type="color"]{
+    width: 25px;
+    height: 25px;
+    margin-left: -50px;
+    margin-top: 5px;
+}
+
+#send_box>span{
+    position: absolute;
+    margin-left: -80px;
+    margin-top: 3px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/*****************************************/
+#controller_right{
+    top: 5px;
+    float: right;
+}
+#controller{
+    padding:8px 0;
+}
+.btn_shape, .controller>span{
+    width: 34px;
+    height: 34px;
+    margin-right: 10px; /* 间距 */
+    margin-left: 10px; /* 间距 */
+    border-radius: 50%;
+    float: left; /* 使div一行展示 */
+    position: relative; /* 控制图标 */
+    cursor: pointer;
+}
+.btn_shape>img{
+    width: 20px;
+    height: 20px;
+    /* 居中 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-47%, -50%);
+}
+.btn_shape:hover{
+    background-color: #818181;
+}
+
+/***************************************/
+/* 进度条 */
+#progress_var{
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: snow;
+    left: 0;
+    top: -2px;
+}
+#progress_var>div{
+    position: absolute;
+    height: 4px;
+    background-color: #00AEEC;
+    width: 0;
+    left: 0;
+    top: 0;
+}
+#progress_var i{
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 3px;
+    background-color: #fff;
+    left: 120px;
+    top: -2px;
+    /* 不可被选中 */
+    pointer-events: none;
+}
+#progress_var:hover{
+    height: 7px;
+    top:-4px
+}
+#progress_var:hover div{
+    height: 7px;
+    top: 0px;
+}
+#progress_var:hover i{
+    height: 11px;
+    width: 11px;
+    border-radius: 11px;
+    top: -2px;
+}
+
+/******************************************/
+/* 视频倍数 */
+#video_speeds{
+    width: 60px;
+    height:200px;
+    border-radius: 15px;
+    position: absolute;
+    top: -160px;
+    text-align: center;
+    list-style: none;
+    background-color: rgba(129, 129, 129, 0.5);
+}
+#video_speeds>li{
+    width: 60px;
+    margin-top: 5px;
+    margin-left: 0;
+}
+#video_speeds li:hover {
+    background-color: rgba(129, 129, 129);
+}
+#video_speeds li:hover>a {
+    color: #00AEEC;
+    font-weight: bold;
+}
+
+/*************************************/
+/* 弹幕设置 */
+#barrage_setting {
+    width: 230px;
+    height:150px;
+    border-radius: 15px;
+    position: absolute;
+    top: -155px;
+    margin-left: -80px;
+    text-align: center;
+    list-style: none;
+    background-color: rgba(129, 129, 129, 0.5);
+    display: none;
+}
+
+#barrage_setting>li {
+    margin-left: -2px;
+    margin-right: 11px;
+    top: 3px;
+}
+
+.barrage_setting {
+    width: 213px;
+    height: 20px;
+    position: absolute;
+    margin-top: 40px;
+    left: 4px;
+    text-align: left;
+    font-size: 13px;
+    color: #FFFFFF;
+}
+
+.barrage_setting>div {
+    position: absolute;
+    width: 130px;
+    height: 4px;
+    background-color: #FFFFFF;
+    left: 60px;
+    top: 8px;
+    cursor: pointer;
+}
+
+.barrage_setting>div>div {
+    position: absolute;
+    height: 4px;
+    background-color: #00AEEC;
+    width: 50%;
+    left: 0;
+    top: 0;
+}
+
+.barrage_setting>p {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+/*************************************/
+/* 视频音量 */
+#voice_progress {
+    position: absolute;
+    width: 34px;
+    height: 210px;
+    background-color: rgb(129,129,129,0.5);
+    top: -167px;
+    border-radius: 17px;
+    margin-left: 64px;
+    display: none;
+    overflow: hidden;
+}
+
+#voice_progress>p {
+    margin-top: 3px;
+    color: #FFFFFF;
+}
+#voice_total{
+    position: absolute;
+    height: 140px;
+    background-color: snow;
+    width: 20px;
+    top: 45%;
+    left: 50%;
+    transform: translate(-49.8%, -50%);
+    border-radius: 10px;
+    overflow: hidden;
+}
+#voice_pro {
+    width: 20px;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 174, 236, 0.9);
+}
+#voice_btn_else {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    bottom: 0;
+}
+/**************************************/
+a{
+    color: #FFFFFF;
+    text-decoration: none;
+}

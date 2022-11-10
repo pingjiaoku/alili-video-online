@@ -1,0 +1,377 @@
+
+body {
+    position: relative;
+    height: 100%;
+}
+
+body>div {
+    position: relative;
+    height: 100%;
+    width: 1440px;
+    margin: 0 auto;
+    background-color: white;
+}
+
+#video-main-area{
+    position: relative;
+    width: 69%;
+    height: 100%;
+    border-right: 1px solid #F0F0F0;
+}
+#title-area{
+    position: absolute;
+    top:70px;
+    left: 79px;
+}
+#title-area h2{
+    font-size: 20px;
+}
+#title-area img{
+    position: relative;
+    top:5px;
+    width: 20px;
+}
+#title-area span{
+    color: #505050;
+    font-size: 13px;
+}
+#title-area>span>span{
+    margin-right: 10px;
+}
+
+
+
+#video-describe-area{
+    position: relative;
+    top:150px;
+    left: 80px;
+    width: 900px;
+    font-size: 15px;
+}
+#video-describe-area>p{
+    position: relative;
+    width: 800px;
+    height: 100%;
+    min-height: 50px;
+    overflow-y: scroll;
+    line-height: 25px;
+    font-size: 15px;
+}
+#video-describe-area>p::-webkit-scrollbar {
+    width:0;
+}
+#video-describe-area>div {
+    position: absolute;
+    top:5px;
+    right: 0;
+    border-top-right-radius: 5px;
+}
+#video-describe-area>div li{
+    position: relative;
+}
+#video-describe-area>div img{
+    position: relative;
+    left: -22px;
+}
+#video-describe-area>div p{
+    position: relative;
+    top: -22px;
+}
+
+
+
+
+
+#video-comment-area{
+    position: relative;
+    top:180px;
+    left: 80px;
+}
+#video-comment-area>div>p{
+    position: relative;
+    top: -20px;
+    left: 38px;
+    color: #505050;
+}
+#video-comment-area>div>span{
+    position: absolute;
+    top:2px;
+    font-size: 14px;
+    font-weight: bold;
+}
+#video-comment-area>div>div{
+    width: 1px;
+    height: 20px;
+    background-color: #c4c4c4;
+    position: absolute;
+    left: 150px;
+    top:2px;
+}
+#video-comment-area>div>ul>li{
+    position: relative;
+    top: 20px;
+    width: 900px;
+    border-bottom: 1px solid #505050;
+    margin-bottom: 40px;
+    border-image:linear-gradient(to right,#FFFFFF,#00AEEC,#FFFFFF) 1 10;
+}
+#video-comment-area .comment-headshot{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #505050;
+}
+
+#video-comment-area .comment-headshot:hover{
+    animation: myani3 0.5s;
+}
+@keyframes myani3 {
+    30% {
+        width: 45px;
+        height: 45px;
+    }
+}
+.comment-content{
+    position: relative;
+    left: 54px;
+    top: -50px;
+    width: 870px;
+}
+.comment-content>h6{
+    font-size: 14px;
+    color: #505050;
+    width: max-content;
+}
+.comment-content>p{
+    position: relative;
+    width: 800px;
+    top: 10px;
+    font-size: 15px;
+    line-height: 25px;
+}
+.comment-message{
+    position: absolute;
+    bottom:40px;
+    left: 55px;
+}
+.comment-message>li{
+    float: left;
+    position: relative;
+    top:50px;
+    margin-right: 50px;
+}
+.comment-message p{
+    font-size: 13px;
+    color: #606060;
+}
+.comment-like>p{
+    position: relative;
+    top:-20px;
+    left: 20px;
+}
+
+
+
+
+
+#bottom-fixed{
+    position: sticky;
+    bottom: -50px;
+    height: 50px;
+    width: 69%;
+    transition: 0.3s;
+}
+#bottom-fixed>div{
+    position: relative;
+    width: 90%;
+    height: 100%;
+    left: 80px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    background-color: #F0F0F0;
+    overflow: hidden;
+}
+#comment-input>label{
+    position: absolute;
+    bottom: 0;
+    width: 82%;
+    height: 90%;
+    left: 30px;
+
+    border-radius: 22px;
+    background-color: #FFFFFF;
+}
+#comment-input>label>textarea{
+    position: relative;
+    left: 20px;
+    height: 100%;
+    width: 90%;
+    border: 0;
+    outline: none;
+    resize: none;
+    overflow-y: scroll;
+    font-size: 15px;
+}
+#comment-input>label>textarea::-webkit-scrollbar {
+    width:0;
+}
+#comment-input>input[type="button"]{
+    position: absolute;
+    right: 30px;
+    width: 80px;
+    height: 90%;
+    bottom: 0;
+    border-radius: 22px;
+    border: 0;
+    background-color: #00AEEC;
+    font-size: 15px;
+    color: #FFFFFF;
+}
+
+
+
+
+#video-page-right-area{
+    position: absolute;
+    right: 0;
+    top:70px;
+    width: 30%;
+    height: 500px;
+}
+#author-main{
+    width: 100%;
+    height: 100px;
+    border-bottom: 1px solid #00AEEC;
+    border-image:linear-gradient(to right,#FFFFFF,#00AEEC,#FFFFFF) 1 10;
+}
+#author-headshot{
+    position: relative;
+    top: 13px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    box-shadow: 0 0 1px 1px #505050;
+}
+#author-headshot:hover {
+    box-shadow: 0 0 2px 2px #00AEEC;
+}
+#author-headshot img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+#author-main-info{
+    position: absolute;
+    top:10px;
+    left: 90px;
+    width: 200px;
+}
+#author-main-info>h4{
+    font-size: 17px;
+}
+#author-main-info>p{
+    position: relative;
+    top:5px;
+    left: 0;
+    width: 70px;
+    white-space: nowrap;
+    font-size: 14px;
+    color: #505050;
+}
+#author-main-info>input[type="button"]{
+    position: relative;
+    top:10px;
+    border: 0;
+    background-color: #00AEEC;
+    color: #FFFFFF;
+    width: 150px;
+    height: 30px;
+    border-radius: 8px;
+}
+#author-main-info>input[type="button"]:hover{
+    background-color: rgba(0, 174, 236, 0.7);
+    cursor: pointer;
+}
+
+#next-videos{
+    width: 100%;
+}
+.next-video-area{
+    position: relative;
+    margin-top: 20px;
+    border-bottom: 1px solid;
+    border-image:linear-gradient(to right,#FFFFFF,#00AEEC,#FFFFFF) 1 10;
+}
+.videos-cover{
+    position: relative;
+    width: 200px;
+    height: 130px;
+
+    border-radius: 5px;
+    overflow: hidden;
+}
+.videos-cover:hover{
+    border: 1px solid rgba(0, 174, 236, 0);
+}
+.videos-cover>img{
+    width: 100%;
+    height: 100%;
+}
+.videos-cover>div{
+    position: absolute;
+    bottom: 3px;
+    right: 4px;
+    background-color: rgba(80, 80, 80, 0.5);
+    border-radius: 4px;
+}
+.videos-cover>div>p{
+    color: #FFFFFF;
+}
+.next-videos-info{
+    position: absolute;
+    top:0;
+    right: 0;
+    width: calc(100% - 200px);
+    height: 100%;
+}
+.next-videos-info>h5{
+    position: relative;
+    width: 90%;
+    left: 10px;
+    font-size: 17px;
+    font-weight: 500;
+}
+.next-videos-info img{
+    width: 20px;
+    height: 20px;
+}
+.next-videos-info>div{
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    bottom: 0;
+}
+.no-mean-relative{
+    position: relative;
+    left: 10px;
+    top: 15px;
+}
+.next-videos-info p{
+    position: absolute;
+    font-size: 14px;
+    top:0;
+    left: 22px;
+    white-space: nowrap;
+    color: #505050;
+}
+.no-mean-relative>li{
+    position: absolute;
+
+}
+
+
+
+
+
+
+

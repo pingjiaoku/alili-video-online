@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="imgs/ALILI-logo.png" rel="icon" type="image/x-ico">
+    <link rel="stylesheet" href="css/top-nav.css">
+    <link rel="stylesheet" href="css/index/massage.css">
+    <link rel="stylesheet" href="css/index/register-login.css">
+    <link rel="stylesheet" href="css/video/video.css">
+    <link rel="stylesheet" href="css/video/main.css" >
+    <link rel="stylesheet" href="css/public.css">
+    <script src="js/public.js"></script>
+    <script src="js/jquery.js"></script>
+</head>
+<body>
+<div>
+
+    <div id="video-change-page">
+    <!-- 左主界面 -->
+    <div id="video-main-area">
+        <!-- 顶部标题栏 -->
+        <div id="title-area">
+            <h2 id="main-video-title"></h2>
+            <span>
+                <span>
+                    <img alt="" src="imgs/icon/bofang-black.svg">
+                    <span></span>
+                </span>
+                <span>
+                    <img alt="" src="imgs/icon/barrage-black.svg">
+                    <span></span>
+                </span>
+                <span>
+                    <img alt="" src="">
+                    <span></span>
+                </span>
+            </span>
+        </div>
+
+
+    <!-- 上一个 暂停 下一个   弹幕设置 输入框 发送    倍数 音量 画中画 全屏  -->
+    <!--              弹幕关   滚动弹幕关   顶部弹幕关                 -->
+        <div id="video_player">
+            <video></video>
+            <canvas></canvas>
+            <div id="controller_menu">
+                <!-- 进度条 -->
+                <div id="progress_var">
+                    <!-- 已播放的进度 -->
+                    <div></div>
+                    <!-- 播放的标记点 -->
+                    <i></i>
+                </div>
+                <div id="controller">
+                    <div class="controller">
+        <!--                <div class="btn_shape"><img id="play_pre" src="imgs/video_controller/play-previous.svg" alt=""></div>-->
+                        <div class="btn_shape"><img src="imgs/video_controller/play.svg" id="play_btn" alt=""></div>
+        <!--                <div class="btn_shape"><img src="imgs/video_controller/play-next.svg" alt=""></div>-->
+                        <span id="this_video_time" style="padding:7px 0; color: #FFFFFF; pointer-events: none;">00:00/00:00</span>
+                    </div>
+
+                    <div style="display: inline-block">
+                        <div  class="btn_shape" id="barrage_set"><img src="imgs/video_controller/弹幕设置.svg" alt=""></div>
+                        <!-- 弹幕设置抽屉 -->
+                        <ul id="barrage_setting">
+                            <li class="btn_shape"><img id="brg_switch" src="imgs/video_controller/播放器-弹幕（开）_44.svg" alt=""></li>
+                            <li class="btn_shape"><img id="brg_top_switch" src="imgs/video_controller/播放器-弹幕顶部（开）_44.svg" alt=""></li>
+                            <li class="btn_shape"><img id="brg_move_switch" src="imgs/video_controller/播放器-弹幕滚动（开）_44.svg" alt=""></li>
+                            <li class="barrage_setting" style="margin-top: 50px;">
+                                弹幕速度
+                                <!-- 进度条 -->
+                                <div id="barrage_speed">
+                                    <div></div>
+                                </div>
+                                <p id="barrage_speed_count">50</p>
+                            </li>
+                            <li class="barrage_setting" style="margin-top: 80px;">
+                                弹幕大小
+                                <!-- 进度条 -->
+                                <div id="barrage_size">
+                                    <div></div>
+                                </div>
+                                <p id="barrage_size_count">50</p>
+                            </li>
+                            <li class="barrage_setting" style="margin-top: 110px;">
+                                不透明度
+                                <!-- 进度条 -->
+                                <div id="barrage_transparency">
+                                    <div style="width: 100%"></div>
+                                </div>
+                                <p id="barrage_tran_count">100</p>
+                            </li>
+                        </ul>
+                        <div id="send_box" class="controller">
+                            <input id="barrage_input" type="text" value="" maxlength="20" placeholder="快来发条弹幕~">
+                            <span><img id="send_brg_type" src="imgs/video_controller/播放器-弹幕滚动（开）_44.svg" alt=""></span>
+                            <input id="barrage_color" type="color" style="cursor: pointer" value="#FFFFFF">
+                            <button id="barrage_send_btn">发送</button>
+                        </div>
+                    </div>
+                    <div class="controller" id="controller_right">
+                        <span id="video_speed" style="padding:6px 0; color: #FFFFFF">1x</span>
+                        <!-- 视频倍数抽屉 -->
+                        <ul id="video_speeds" style="display: none">
+                            <li style="border-radius: 8px 8px 0 0;"><a href="JavaScript:VideoSpeedChange(2)">2x</a></li>
+                            <li><a href="JavaScript:VideoSpeedChange(1.5)">1.5x</a></li>
+                            <li><a href="JavaScript:VideoSpeedChange(1.25)">1.25x</a></li>
+                            <li><a href="JavaScript:VideoSpeedChange(1)">1x</a></li>
+                            <li><a href="JavaScript:VideoSpeedChange(0.75)">0.75x</a></li>
+                            <li><a href="JavaScript:VideoSpeedChange(0.5)">0.5x</a></li>
+                        </ul>
+
+                        <div class="btn_shape" id="voice_btn"><img src="imgs/video_controller/sound-on.svg" alt=""></div>
+                        <!-- 音量抽屉 -->
+                        <div id="voice_progress">
+                            <p id="voice_count">100</p>
+                            <!-- 进度条 -->
+                            <div id="voice_total">
+                                <!-- 当前音量 -->
+                                <div style="pointer-events: none;" id="voice_pro"></div>
+                            </div>
+                            <div id="voice_btn_else"></div>
+                        </div>
+                        <div class="btn_shape"><img id="pic_in_pic" src="imgs/video_controller/pip.svg" alt=""></div>
+                        <div class="btn_shape"><img id="fullscreen_btn" src="imgs/video_controller/fullscreen-enter.svg" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 视频描述区域 -->
+        <div id="video-describe-area">
+            <!-- 视频简介 -->
+            <p></p>
+
+            <!-- 点赞收藏 -->
+            <div>
+                <ul id="main-video-like-coll">
+                    <li class="cursor-pointer">
+                        <img src="imgs/icon/dongtai-off.svg" alt="">
+                        <p></p>
+                    </li>
+                    <li class="cursor-pointer">
+                        <img src="imgs/icon/shoucang-off.svg" alt="">
+                        <p></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr style="top:170px">
+
+        <!-- 评论区域 -->
+        <div id="video-comment-area">
+            <div id="video-comment-info">
+                <h4>评论</h4>
+                <p></p>
+                <span class="font-cover-change-color" style="left: 110px;">最新</span>
+                <div></div>
+                <span class="font-cover-change-color" style="left: 160px;">最热</span>
+            </div>
+            <div>
+                <ul id="video-comments">
+
+                </ul>
+                <!-- 下面的div只是用来撑大body>div -->
+                <div style="position:relative;height: 200px;width: 100%;background-color: rgba(255,255,255,0)"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 右侧作者、推荐视频栏 -->
+    <div id="video-page-right-area">
+        <div id="author-main"></div>
+
+        <!-- 推荐视频栏 -->
+        <div id="next-videos">
+            <ul>
+                <li class="next-video-area">
+                    <div class="videos-cover cursor-pointer" onclick="ToVideoPage('vid1')">
+                        <img src="web-resources/cover/default-cover.jpg" alt="">
+                        <div>
+                            <p>14:55</p>
+                        </div>
+
+                    </div>
+                    <div class="next-videos-info">
+                        <h5 onclick="ToVideoPage('vid1')" class="font-cover-change-color">我是视频标题我是视频标题我是视频标题我是视频标题</h5>
+                        <div>
+                            <div class="no-mean-relative">
+                                <img src="imgs/icon/dongwu-on.svg" alt="">
+                                <p class="font-cover-change-color">我是作者昵称</p>
+                            </div>
+                            <ul class="no-mean-relative">
+                                <li>
+                                    <img src="imgs/icon/publish-manage.svg" alt="">
+                                    <p>1234.4万</p>
+                                </li>
+                                <li style="left: 100px;">
+                                    <img src="imgs/icon/publish-manage.svg" alt="">
+                                    <p>1234.4万</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="next-video-area">
+                    <div class="videos-cover">
+                        <img src="web-resources/cover/default-cover.jpg" alt="">
+                        <div>
+                            <p>14:55</p>
+                        </div>
+
+                    </div>
+                    <div class="next-videos-info">
+                        <h5 class="font-cover-change-color">我是视频标题我是视频标题我是视频标题我是视频标题</h5>
+                        <div>
+                            <div class="no-mean-relative">
+                                <img src="imgs/icon/dongwu-on.svg" alt="">
+                                <p class="font-cover-change-color">我是作者昵称</p>
+                            </div>
+                            <ul class="no-mean-relative">
+                                <li>
+                                    <img src="imgs/icon/publish-manage.svg" alt="">
+                                    <p>1234.4万</p>
+                                </li>
+                                <li style="left: 100px;">
+                                    <img src="imgs/icon/publish-manage.svg" alt="">
+                                    <p>1234.4万</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="next-video-area">
+                    <div class="videos-cover">
+                        <img src="web-resources/cover/default-cover.jpg" alt="">
+                        <div>
+                            <p>14:55</p>
+                        </div>
+
+                    </div>
+                    <div class="next-videos-info">
+                        <h5 class="font-cover-change-color">我是视频标题我是视频标题我是视频标题我是视频标题</h5>
+                        <div>
+                            <div class="no-mean-relative">
+                                <img src="imgs/icon/dongwu-on.svg" alt="">
+                                <p class="font-cover-change-color">我是作者昵称</p>
+                            </div>
+                            <ul class="no-mean-relative">
+                                <li>
+                                    <img src="imgs/icon/publish-manage.svg" alt="">
+                                    <p>1234.4万</p>
+                                </li>
+                                <li style="left: 100px;">
+                                    <img src="imgs/icon/publish-manage.svg" alt="">
+                                    <p>1234.4万</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="next-video-area">
+                    <div class="videos-cover">
+                        <img src="web-resources/cover/default-cover.jpg" alt="">
+                        <div>
+                            <p>14:55</p>
+                        </div>
+
+                    </div>
+                    <div class="next-videos-info">
+                        <h5 class="font-cover-change-color">我是视频标题我是视频标题我是视频标题我是视频标题</h5>
+                        <div>
+                            <div class="no-mean-relative">
+                                <img src="imgs/icon/dongwu-on.svg" alt="">
+                                <p class="font-cover-change-color">我是作者昵称</p>
+                            </div>
+                            <ul class="no-mean-relative">
+                                <li>
+                                    <img src="imgs/icon/publish-manage.svg" alt="">
+                                    <p>1234.4万</p>
+                                </li>
+                                <li style="left: 100px;">
+                                    <img src="imgs/icon/publish-manage.svg" alt="">
+                                    <p>1234.4万</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="next-video-area">
+                    <div class="videos-cover">
+                        <img src="web-resources/cover/default-cover.jpg" alt="">
+                        <div>
+                            <p>14:55</p>
+                        </div>
+
+                    </div>
+                    <div class="next-videos-info">
+                        <h5 class="font-cover-change-color">我是视频标题我是视频标题我是视频标题我是视频标题</h5>
+                        <div>
+                            <div class="no-mean-relative">
+                                <img src="imgs/icon/dongwu-on.svg" alt="">
+                                <p class="font-cover-change-color">我是作者昵称</p>
+                            </div>
+                            <ul class="no-mean-relative">
+                                <li>
+                                    <img src="imgs/icon/publish-manage.svg" alt="">
+                                    <p>1234.4万</p>
+                                </li>
+                                <li style="left: 100px;">
+                                    <img src="imgs/icon/publish-manage.svg" alt="">
+                                    <p>1234.4万</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="next-video-area">
+                    <div class="videos-cover">
+                        <img src="web-resources/cover/default-cover.jpg" alt="">
+                        <div>
+                            <p>14:55</p>
+                        </div>
+
+                    </div>
+                    <div class="next-videos-info">
+                        <h5 class="font-cover-change-color">我是视频标题我是视频标题我是视频标题我是视频标题</h5>
+                        <div>
+                            <div class="no-mean-relative">
+                                <img src="imgs/icon/dongwu-on.svg" alt="">
+                                <p class="font-cover-change-color">我是作者昵称</p>
+                            </div>
+                            <ul class="no-mean-relative">
+                                <li>
+                                    <img src="imgs/icon/publish-manage.svg" alt="">
+                                    <p>1234.4万</p>
+                                </li>
+                                <li style="left: 100px;">
+                                    <img src="imgs/icon/publish-manage.svg" alt="">
+                                    <p>1234.4万</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- 评论输入框 -->
+    <div id="bottom-fixed">
+        <div>
+            <div id="comment-input">
+                <label>
+                    <textarea id="video-comment-content" maxlength="200" placeholder="来发送条评论~，表超过200字"></textarea>
+                </label>
+                <input class="cursor-pointer" onclick="SendVideoComment()" type="button" value="发送">
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- 顶部导航栏 -->
+    <div id="top-nav">
+        <div onclick="ToIndexPage()">
+            <img id="logo" src="imgs/ALILI-font-logo.png" alt="">
+        </div>
+    </div>
+
+    <!-- 蒙版 -->
+    <div id="layer-page"></div>
+</div>
+<script src="js/video/videoController.js"></script>
+<script src="js/video/barrage.js"></script>
+<script src="js/video/video.js"></script>
+<script src="js/video/comment.js"></script>
+<script>
+    window.onload = function (){
+        DrawTopNav();
+        // 登录
+        Logging();
+
+        // 从url上获取视频id
+        let videoId = getQueryString("VID");
+        if(videoId !== null){
+            // 获取视频
+            AjaxGetVideoInfo(videoId);
+
+        } else {
+            NoVideoFound();
+        }
+
+
+    }
+
+    function Logging() {
+        let acc = getCookie("alili_acc");
+        let pwd = getCookie("alili_pwd");
+
+        if(acc === null || pwd === null) {
+            // 没有账号密码cookie
+            DrawLoginPage();
+        } else {
+            $.ajax({
+                type:"post",
+                url:"Logging",
+                data:{
+                    'account':acc,
+                    'password':pwd
+                },
+                success:function (data){
+                    if(data === "NoUserFound"){
+                    } else {
+
+                        SetPersonalBox(eval(data));
+
+                        // 设置点击头像不再出现登录框，而是跳转到个人主页
+                        document.getElementById("headshot").onclick = function (){
+                            ToHomePage(data['id']);
+                        };
+
+                        SetMessageBox();
+
+                        AddUserFunListener();
+                    }
+                },
+                error:function (){
+                    alert("服务器连接失败")
+                }
+            })
+        }
+    }
+
+    // 未找到视频
+    function NoVideoFound(){
+        let page = document.getElementById("video-change-page");
+        page.innerHTML = "<img style='position: fixed; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 300px; height: 250px;' src=\"imgs/none.svg\" alt=\"\">";
+    }
+
+    // 发送评论
+    function SendVideoComment(){
+        // 获取评论数据
+        let comment = document.getElementById("video-comment-content");
+        let content = comment.value;
+        content = content.replace(/\r\n/g, '<br/>'); //IE9、FF、chrome
+        content = content.replace(/\n/g, '<br/>'); //IE7-8
+        content = content.replace(/\s/g, '&nbsp;'); //空格处理
+
+        // 获取视频id
+        let videoId = getQueryString("VID");
+
+        // 先发送到后端进行用户验证并保存
+        AjaxSendComment(comment, content, videoId);
+    }
+
+
+
+
+    // 滚动到评论处才显示评论输入框
+    window.onmousewheel = function() {
+        let bottomFixed = document.getElementById("bottom-fixed");
+
+        // 为了解决鼠标滚动过快时，onmousewheel只执行一次，
+        // 这里使用一个计时器，滚动一次时重复获取当前窗口底部到网页顶部距离，0.2s结束
+        let timer = new Timer();
+        timer.repeat(function (){
+            let yHeight=getScrollTop(); //滚动条距顶端的距离
+            let height =document.documentElement.clientHeight//窗口的高度
+            let top=parseInt(yHeight)+parseInt(height);
+            console.log(top);
+            if(top<950){
+                bottomFixed.style.bottom = "-50px";
+            }else {
+                bottomFixed.style.bottom = "0";
+            }
+        },50)
+
+        setTimeout(function (){
+            timer.clear();
+        },200)
+
+    }
+    function getScrollTop() {
+        let scrollPos;
+        if (window.pageYOffset) {
+            scrollPos = window.pageYOffset;
+        }
+        else if (document.compatMode && document.compatMode !== 'BackCompat') {
+            scrollPos = document.documentElement.scrollTop;
+        }
+        else if (document.body) {
+            scrollPos = document.body.scrollTop;
+        }
+        return scrollPos;
+    }
+
+</script>
+<script src="js/index/Login.js"></script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创作中心-阿哩哩</title>
+    <link href="imgs/ALILI-logo.png" rel="icon" type="image/x-ico">
+    <script src="js/jquery.js"></script>
+    <script src="js/svg-inject.min.js"></script>
+    <link rel="stylesheet" href="css/public.css">
+    <link rel="stylesheet" href="css/top-nav.css">
+    <link rel="stylesheet" href="css/index/massage.css">
+    <link rel="stylesheet" href="css/index/register-login.css">
+    <link rel="stylesheet" href="css/publish/main.css">
+</head>
+<body>
+<div>
+    <!-- 视频信息设置 -->
+    <div id="main-page">
+        <div id="left-menu">
+            <div>
+                <div id="publish-manage">
+                    <a>
+                        <img src="imgs/icon/publish/upload.svg" onload="SVGInject(this)" alt="">
+                        <span style="color: #FFFFFF">投稿</span>
+                    </a>
+                </div>
+                <ul id="manage-center">
+                    <li id="video-manage">
+                        <a>
+                            <img src="imgs/icon/publish/video.svg" onload="SVGInject(this)" alt="">
+                            <span>稿件管理</span>
+                        </a>
+                    </li>
+                    <li id="comment-manage">
+                        <a>
+                            <img src="imgs/icon/publish/comment.svg" onload="SVGInject(this)" alt="">
+                            <span>评论管理</span>
+                        </a>
+                    </li>
+                    <li id="barrage-manage">
+                        <a>
+                            <img src="imgs/icon/publish/barrage.svg" onload="SVGInject(this)" alt="">
+                            <span>弹幕管理</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <form id="publish-page" enctype="multipart/form-data">
+            <div id="publish-video">
+                <h3>上传视频</h3>
+                <hr style="left: -100px;width: 800px;">
+                <div>
+                    <video controls src=""></video>
+                    <input type="file" id="video" name="video" value="" accept="video/avi,video/mp4,video/mpeg,video/mov,video/webm,video/m4v">
+                </div>
+            </div>
+
+            <div id="publish-video-info">
+                <h3>视频信息</h3>
+                <hr style="left: -100px;width: 800px;">
+                <ul>
+                    <li>
+                        <span style="top:40px;" class="star">*</span>
+                        <label style="top:40px;">封面</label>
+                        <div id="cover">
+                            <div>上传封面</div>
+                            <input type="file" name="cover" value="" accept="image/png,image/jpg,image/jpeg,image/webp">
+                        </div>
+                    </li>
+                    <li>
+                        <span class="star">*</span>
+                        <label for="video-title">标题</label>
+                        <input id="video-title" type="text" style="width: 800px;" name="title" value="" maxlength="40" placeholder="清晰表明内容亮点的标题会更受观众欢迎哟">
+                    </li>
+                    <li>
+                        <span class="star">*</span>
+                        <label for="publish-channels">分区</label>
+                        <select name="channel" id="publish-channels">
+                            <option value="1">影视</option>
+                            <option value="2">动漫</option>
+                            <option value="3">游戏</option>
+                            <option value="4">音乐</option>
+                            <option value="5">美食</option>
+                            <option value="6">搞笑</option>
+                            <option value="7">运动</option>
+                            <option value="8">日常</option>
+                            <option value="9">科技</option>
+                            <option value="10">动物</option>
+                            <option value="11">鬼畜</option>
+                            <option value="12">军事</option>
+                            <option value="13">时尚</option>
+                        </select>
+                    </li>
+                    <li id="tag">
+                        <label for="create-tag">标签</label>
+                        <input id="create-tag" type="text" value="" maxlength="10" placeholder="选择合适标签更容易被其他人看到哦，按回车键创建标签">
+                        <div>
+
+                        </div>
+                        <div>
+                            <p>推荐标签</p>
+                            <div id="recommended-tags"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="video-describe">简介</label>
+                        <textarea id="video-describe" name="describe" property="你的视频简介"></textarea>
+                    </li>
+                </ul>
+            </div>
+
+            <div onclick='AjaxVideoPublish()' class='cursor-pointer' id="publish-btm">
+                <img src="imgs/icon/publish/upload.svg" alt="">
+                <p>发布</p>
+            </div>
+            <label id="hide-info" style="display: none">
+                <input type="text" name="account" value="">
+                <input type="text" name="password" value="">
+                <input type="text" name="total-time" value="">
+                <input type="text" name="tags-count" value="">
+            </label>
+        </form>
+
+    </div>
+
+
+
+    <!-- 顶部导航栏 -->
+    <div id="top-nav">
+        <div onclick="ToIndexPage()">
+            <img id="logo" src="imgs/ALILI-font-logo.png" alt="">
+        </div>
+    </div>
+
+    <!-- 蒙版 -->
+    <div id="layer-page"></div>
+</div>
+</body>
+<script src="js/public.js"></script>
+<script src="js/publish/upload.js"></script>
+<script>
+    window.onload = function (){
+        DrawTopNav();
+        Logging();
+    }
+
+
+    function Logging() {
+        let acc = getCookie("alili_acc");
+        let pwd = getCookie("alili_pwd");
+
+        if(acc === null || pwd === null) {
+            // 没有账号密码cookie
+            NoLoginNoPage()
+        } else {
+            $.ajax({
+                type:"post",
+                url:"Logging",
+                data:{
+                    'account':acc,
+                    'password':pwd
+                },
+                success:function (data){
+                    if(data === "NoUserFound"){
+                    } else {
+                        AjaxGetRecommendedTags(document.getElementById("publish-channels").value)
+
+                        AddPublishListener();
+
+                        SetPersonalBox(eval(data));
+
+                        // 设置点击头像不再出现登录框，而是跳转到个人主页
+                        document.getElementById("headshot").onclick = function (){
+                            ToHomePage(data['id']);
+                        };
+
+                        SetMessageBox();
+
+                        AddUserFunListener();
+                    }
+                },
+                error:function (){
+                    alert("服务器连接失败")
+                }
+            })
+        }
+    }
+
+    // 没哟登录就不能在此页面登录
+    function NoLoginNoPage(){
+        document.querySelector("body").children[0].innerHTML = ""
+    }
+
+
+
+</script>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="imgs/ALILI-logo.png" rel="icon" type="image/x-ico">
+    <link href="css/top-nav.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/public.css">
+    <link rel="stylesheet" href="css/home/user-page.css">
+    <link rel="stylesheet" href="css/index/register-login.css">
+    <link rel="stylesheet" href="css/index/massage.css">
+    <script src="js/public.js"></script>
+    <script src="js/svg-inject.min.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/index/Login.js"></script>
+    <script src="js/home/main-fun.js"></script>
+    <style>
+        body{
+            height: 1600px;
+            background-color: #F0F0F0;
+        }
+        body>div{
+            position: relative;
+            height: 100%;
+            width: 1300px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div id="home-main-page">
+        <div id="background-picture"></div>
+        <div id="home-user-info">
+            <img id="home-headshot" src="" alt="">
+            <ul id="user-video-info">
+                <li onclick="ShowUserVideos(this)" class="cursor-pointer">
+                    <img src="imgs/icon/dianshiju-on.svg" onload="SVGInject(this)" alt="">
+                    <span>投稿</span>
+                    <p></p>
+                    <div></div>
+                </li>
+                <li onclick="ShowUserColl(this)" class="cursor-pointer">
+                    <img src="imgs/icon/shoucang-on.svg" onload="SVGInject(this)" alt="">
+                    <span>收藏</span>
+                    <p></p>
+                    <div></div>
+                </li>
+                <!--<li onclick="ShowUserHis()" class="cursor-pointer">
+                    <img src="imgs/icon/lishi-on.svg" onload="SVGInject(this)" alt="">
+                    <span>历史</span>
+                    <p>12</p>
+                    <div></div>
+                </li>-->
+            </ul>
+            <ul id="user-interactive-info">
+                <li onclick="ShowUserConcern()" class="cursor-pointer">
+                    <p></p>
+                    <span>关注</span>
+                </li>
+                <li onclick="ShowUserFans()" class="cursor-pointer">
+                    <p id="author-fans"></p>
+                    <span>粉丝</span>
+                </li>
+                <li class="cursor-pointer">
+                    <p></p>
+                    <span>获赞</span>
+                </li>
+                <!--<li class="cursor-pointer">
+                    <p>123</p>
+                    <span>播放</span>
+                </li>-->
+            </ul>
+            <div></div>
+
+        </div>
+        <div id="home-video-content">
+            <div>
+                <h4>我的收藏</h4>
+                <ul id="video-sort-rule">
+                    <li class="cursor-pointer" onclick="HomeUserVideoColl('默认收藏夹',this)"><span>默认收藏夹</span></li>
+                    <li class="cursor-pointer" onclick="HomeUserVideoColl('mycoll1',this)"><span>收藏夹1</span></li>
+                    <li class="cursor-pointer" onclick="HomeUserVideoColl('mycoll2',this)"><span>收藏夹2</span></li>
+                </ul>
+            </div>
+            <ul id="my-video-list">
+                <!--<li>
+                    <div class="intrinsic-aspect-ratio-container">
+                        <div onclick='ToVideoPage()' class="cover cursor-pointer">
+                            <img src="web-resources/cover/" alt="">
+                            <div>
+                                <img src='imgs/icon/bofang.svg' alt=''>
+                                <p>1234</p>
+                                <span>1:20</span>
+                            </div>
+                        </div>
+                        <div class="video-message">
+                            <div>
+                                <h3 onclick='ToVideoPage()' class="video-title cursor-pointer">标题</h3>
+                                <p onclick='ToHomePage()' class="video-upload cursor-pointer">收藏于-2022-09-22</p>
+                            </div>
+                        </div>
+                    </div>
+                </li>-->
+                
+            </ul>
+        </div>
+    </div>
+
+    <div id="top-nav">
+        <div onclick="ToIndexPage()">
+            <img id="logo" src="imgs/ALILI-font-logo.png" alt="">
+        </div>
+    </div>
+
+    <!-- 蒙版 -->
+    <div id="layer-page"></div>
+</div>
+</body>
+<script>
+    window.onload = function (){
+        setTimeout(function (){
+            DrawTopNav();
+            let userId = getQueryString("userId");
+            GetUserHomeInfo(userId);
+            let rr = getQueryString("rt");
+            if(rr!=null){
+
+            }else {
+                ShowUserVideos(document.getElementById("user-video-info").children[0]);
+            }
+            Logging();
+        },5);
+    }
+
+    function Logging() {
+        let acc = getCookie("alili_acc");
+        let pwd = getCookie("alili_pwd");
+
+        if(acc === null || pwd === null) {
+            // 没有账号密码cookie
+            DrawLoginPage();
+        } else {
+            $.ajax({
+                type:"post",
+                url:"Logging",
+                data:{
+                    'account':acc,
+                    'password':pwd
+                },
+                success:function (data){
+                    if(data === "NoUserFound"){
+                    } else {
+                        if(data["id"] === getQueryString("userId")){
+                            let str =
+                                "<input type='button' value='修改资料' class=\"other-btm cursor-pointer\" onClick=\"UpdateUserInfo()\">";
+                            document.getElementById("home-user-info").insertAdjacentHTML("beforeend", str);
+                        }
+
+                        SetPersonalBox(eval(data));
+
+                        // 设置点击头像不再出现登录框，而是跳转到个人主页
+                        document.getElementById("headshot").onclick = function (){
+                            ToHomePage(data['id']);
+                        };
+
+                        SetMessageBox();
+
+                        AddUserFunListener();
+                    }
+                },
+                error:function (){
+                    alert("服务器连接失败")
+                }
+            })
+        }
+    }
+
+
+
+    function HomeUserVideoSort(rule, obj){
+        let userId = getQueryString("userId");
+
+        ChangeVideoSortIcon(obj);
+
+        if(userId != null && rule != null){
+            $.ajax({
+                type:"post",
+                url: "GetUserVideos",
+                data:{
+                    id: userId,
+                    rule: rule
+                },
+                success:function (data){
+                    if(data != null){
+                        data = eval(data);
+                        let str = "";
+                        for (let i = 0; i < data.length; i++) {
+                            str +=
+                                "<li>" +
+                                "    <div class=\"intrinsic-aspect-ratio-container\">" +
+                                "        <div onclick='ToVideoPage(\"" + data[i]["id"] + "\")' class=\"cover cursor-pointer\">" +
+                                "            <img src=\"web-resources/cover/" + data[i]["coverUrl"] + "\" alt=\"\">" +
+                                "            <div>" +
+                                "                <img src='imgs/icon/bofang.svg' alt=''>" +
+                                "                <p>" + data[i]["viewCount"] + "</p>" +
+                                "                <span>" + data[i]["totalTime"] + "</span>" +
+                                "            </div>" +
+                                "        </div>" +
+                                "        <div class=\"video-message\">" +
+                                "            <div>" +
+                                "                <h3 onclick='ToVideoPage(\"" + data[i]["id"] + "\")' class=\"video-title cursor-pointer\">" + data[i]["title"] + "</h3>" +
+                                "                <p onclick='ToVideoPage(\"" + data[i]["id"] + "\")' class=\"video-upload cursor-pointer\">" + data[i]["publishDate"] + "</p>" +
+                                "            </div>" +
+                                "        </div>" +
+                                "    </div>" +
+                                "</li>";
+                        }
+                        document.getElementById("my-video-list").innerHTML = str;
+                    }
+                },
+                error:function (){
+                    alert("服务器连接失败")
+                }
+            })
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>阿哩哩 ~一个视频儿网站</title>
+    <link href="imgs/ALILI-logo.png" rel="icon" type="image/x-ico">
+    <script src="js/jquery.js"></script>
+
+    <script src="js/index/videos.js"></script>
+    <link rel="stylesheet" href="css/index/main.css">
+    <link rel="stylesheet" href="css/top-nav.css">
+    <link rel="stylesheet" href="css/index/massage.css">
+    <link rel="stylesheet" href="css/index/register-login.css">
+    <link rel="stylesheet" href="css/index/left-menu.css">
+    <link rel="stylesheet" href="css/public.css">
+
+</head>
+<body>
+<div id="body">
+
+
+    <div id="main">
+        <!-- 视频列表栏 -->
+        <div id="video-content"></div>
+        <!-- 顶部导航栏 -->
+        <div id="top-nav"></div>
+    </div>
+
+    <!-- 频道栏 -->
+    <div id="left-menu">
+        <img id="logo" src="imgs/ALILI-font-logo.png" alt="">
+        <div>
+            <ul id="channel-main">
+                <li id="homepage" onclick="GetHomeVideos(this)">
+                    <a>
+                        <img src="imgs/icon/shouye-on.svg" alt="">
+                        <span>首页</span>
+                    </a>
+                </li>
+                <li id="rankings" onclick="GetRankVideos(this)">
+                    <a>
+                        <img src="imgs/icon/paihangbang-off.svg" alt="">
+                        <span>排行榜</span>
+                    </a>
+                </li>
+                <li id="trends" onclick="GetTrendVideos(this)">
+                    <a>
+                        <img src="imgs/icon/dongtai-off.svg" alt="">
+                        <span>动态</span>
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <div style="width:100%;height:25px;font-weight:bold;margin-top: 10px;">
+                <p style="float: left;color: #555555">频道</p>
+                <a title="频道管理" style="position:absolute;right: 15px" class="cursor-pointer">
+                    <img id="channel-setting" style="pointer-events: auto;width: 20px" src="imgs/video_controller/settings-off.svg" alt="false">
+                </a>
+            </div>
+            <ul id="channel"></ul>
+        </div>
+    </div>
+
+    <!-- 蒙版 -->
+    <div id="layer-page"></div>
+</div>
+</body>
+<script src="js/index/Channel.js"></script>
+
+<script src="js/index/CustomSorting.js"></script>
+
+<script>
+
+    window.onload = function (){
+
+        DrawTopNav();
+
+        Logging();
+
+        GetHomeVideos(document.getElementById("channel-main").children[0]);
+
+        ReWindowsSize();
+    }
+
+
+
+    window.addEventListener('resize', ReWindowsSize);
+    // 窗口缩放自适应
+    function ReWindowsSize() {
+        let x = document.documentElement.clientWidth;
+        let y = document.documentElement.clientHeight;
+        document.getElementById("body").style.height = y+"px";
+        if (x>1160 && x<2160) {
+            document.getElementById("body").style.width = x + "px";
+            // 隐藏水平滚动条
+            document.getElementById("body").parentElement.style.overflowX = "hidden";
+        } else if(x<=1160) {
+            document.getElementById("body").style.width = "1160px";
+            document.getElementById("body").parentElement.style.overflowX = "scroll";
+        } else {
+            document.getElementById("body").style.width = "2160px";
+        }
+    }
+
+
+
+
+
+
+    // 动态字体大小 -- 勾八edge和google字体最小为12px
+    window.addEventListener('resize', ReFontSize);
+
+
+    // 将字体按照父元素的宽度设置百分比大小
+    function ReFontSize() {
+        let x = document.getElementsByClassName("video-message")[0].offsetWidth;
+        let T = document.getElementsByClassName("video-title");
+        let A = document.getElementsByClassName("video-author");
+        for (let i = 0; i < T.length; i++) {
+            T[i].style.fontSize = x*0.06 + "px";
+            A[i].style.fontSize = x*0.05 + "px";
+        }
+    }
+
+
+
+
+    function Logging() {
+        let acc = getCookie("alili_acc");
+        let pwd = getCookie("alili_pwd");
+
+        if(acc === null || pwd === null) {
+            // 没有账号密码cookie
+            ChannelInit(channelList);
+            DrawLoginPage();
+        } else {
+            $.ajax({
+                type:"post",
+                url:"Logging",
+                data:{
+                    'account':acc,
+                    'password':pwd
+                },
+                success:function (data){
+                    if(data === "NoUserFound"){
+                        ChannelInit(channelList);
+                    } else {
+
+                        SetPersonalBox(eval(data));
+
+                        SetChannel(data["id"]);
+                        // 设置点击头像不再出现登录框，而是跳转到个人主页
+                        document.getElementById("headshot").onclick = function (){
+                            ToHomePage(data['id']);
+                        };
+
+                        SetMessageBox();
+
+                        AddUserFunListener();
+                    }
+                },
+                error:function (){
+                    alert("服务器连接失败")
+                }
+            })
+        }
+    }
+
+
+    // 设置个人的频道排序
+    function SetChannel(userId){
+        $.ajax({
+            type:"post",
+            url:"GetChannelSort",
+            data:{
+                "userId":userId
+            },
+            success:function (data){
+                if(data != null) {
+                    ChannelInit(eval(data));
+                } else {
+                    ChannelInit(channelList);
+                }
+            },
+            error:function (){
+                alert("服务器连接失败");
+            }
+        })
+    }
+
+
+
+
+</script>
+<script src="js/public.js"></script>
+<script src="js/index/Login.js"></script>
+</html>

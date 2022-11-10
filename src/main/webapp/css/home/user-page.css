@@ -1,0 +1,242 @@
+#home-main-page{
+    width: 100%;
+    position: relative;
+    top: 50px;
+}
+
+#background-picture{
+    background-image: url("../../imgs/img_very_wide.svg");
+    width: 100%;
+    height: 100px;
+}
+#home-user-info{
+    width: 100%;
+    height: 50px;
+    border: 1px solid #F0F0F0;
+    background-color: #FFFFFF;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+#home-user-info>*{
+    float: left;
+}
+#home-headshot{
+    position: absolute;
+    bottom: 0;
+    width: 80px;
+    height: 80px;
+    border: 5px solid #FFFFFF;
+    background-color: #F0F0F0;
+    border-radius: 50%;
+    left: 100px;
+}
+
+
+#user-video-info{
+    position: relative;
+    left: 250px;
+    top: 15px;
+}
+#user-video-info>li{
+    float: left;
+    margin-right: 30px;
+    width: 80px;
+}
+#user-video-info>li>div{
+    width: 40px;
+    height: 2px;
+    background-color: #00AEEC;
+    position: relative;
+    left: 30px;
+    top: 10px;
+    display: none;
+}
+#user-video-info>li:hover>div{
+    display: block;
+}
+#user-video-info>li:hover *,path{
+    fill: #00AEEC !important;
+    color: #00AEEC !important;
+}
+#user-video-info>li>svg{
+    width: 20px;
+    height: 20px;
+}
+#user-video-info>li>span{
+    position: relative;
+    top: -5px;
+    font-size: 13px;
+    color: #424242;
+}
+#user-video-info>li>p{
+    position: relative;
+    top: 3px;
+    left: 70px;
+    font-size: 12px;
+    color: #505050;
+    float: left;
+}
+#user-video-info>li>svg path{
+    fill: rgba(254, 51, 85, 0.5);
+}
+
+
+
+#user-interactive-info{
+    position: absolute;
+    right: 200px;
+    bottom: 4px;
+}
+#user-interactive-info>li{
+    float: left;
+    margin-left: 30px;
+    width: 50px;
+    text-align:center;
+}
+#user-interactive-info>li:hover *{
+    color: #00AEEC !important;
+}
+#user-interactive-info>li>p{
+    font-size: 14px;
+}
+#user-interactive-info>li>span{
+    font-size: 12px;
+    color: #505050;
+}
+
+#home-user-info>.other-btm{
+    position: absolute;
+    right: 50px;
+    bottom: 5px;
+    border-radius: 10px;
+    background-color: #00AEEC;
+    width: 100px;
+    height: 40px;
+    color: #FFFFFF;
+    outline: none;
+    border: 0;
+
+    text-align: center;
+    font-size: 15px;
+}
+
+
+#home-video-content{
+    position: absolute;
+    top: 170px;
+    width: 100%;
+    height: 900px;
+    border: 1px solid #F0F0F0;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+}
+#home-video-content>div{
+    width: 200px;
+    height: 100%;
+    border-right: 1px solid #F0F0F0;
+}
+#home-video-content>div>*{
+    position: relative;
+    top: 20px;
+}
+#home-video-content>div>h4{
+    font-size: 20px;
+    font-weight: 500;
+    left: 20px;
+}
+#home-video-content>div>ul{
+    top: 40px;
+}
+#home-video-content>div>ul>li{
+    position: relative;
+    height: 40px;
+    left: -1px;
+    border-radius: 20px;
+}
+#home-video-content>div>ul>li:hover{
+    /*background-color: rgba(0, 174, 236, 0.5) !important;*/
+    color: #FE3355 !important;
+}
+#home-video-content>div>ul>li>span{
+    position: relative;
+    left: 40px;
+    top: 8px;
+    font-size: 14px;
+}
+
+
+
+
+#my-video-list{
+    position: absolute;
+    top: 0;
+    left: 200px;
+}
+#my-video-list>li{
+    width: 200px;
+    height: 200px;
+    float: left;
+    margin-left: 50px;
+    margin-top: 40px;
+}
+.intrinsic-aspect-ratio-container{
+    width: 100%;
+    height: 100%;
+}
+.cover{
+    position: relative;
+    width: 100%;
+    height: 70%;
+    overflow: hidden;
+    border: 1px solid #F0F0F0;
+    border-radius: 10px;
+}
+.cover>img{
+    width: 100%;
+    height: 100%;
+}
+.cover>div{
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+}
+.cover>div>img{
+    position: relative;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+}
+.cover>div>p{
+    position: absolute;
+    bottom: 5px;
+    left: 25px;
+    font-size: 14px;
+    color: #FFFFFF;
+}
+.cover>div>span{
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-size: 14px;
+    color: #FFFFFF;
+}
+.video-message{
+    width: 100%;
+    height: 30%;
+    position: relative;
+}
+.video-message>div>h3{
+    font-size: 14px;
+    position: relative;
+    top: 2px;
+    font-weight: 500;
+}
+.video-message>div>p{
+    font-size: 13px;
+    color: #424242;
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+}

@@ -1,0 +1,164 @@
+.form {
+    width: 1000px;
+    height: 500px;
+    background: url("../../imgs/login-register-background.jpg") no-repeat center bottom 0;
+    background-size: 100% 100%;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    border: 2px solid transparent;
+    position: absolute;
+    display: none;
+    overflow: hidden;
+}
+.acc-pwd-info {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 10px;
+}
+.form p {
+    font-size: 15px;
+}
+.tips{
+    font-size: 12px;
+    color: #808080;
+    position: absolute;
+    left: 150px;
+    bottom: -5px;
+}
+.box-title{
+    color: #606060;
+    font-size: 30px;
+    font-weight: 500;
+    position: relative;
+    left: 45%;
+    top:20px;
+}
+
+
+#form-reg>div>div{
+    position: absolute;
+    top: 40px;
+    width: 100%;
+}
+#form-reg>div>div>p{
+    position: absolute;
+    top: 90px;
+    left: 80px;
+    White-space: nowrap;
+}
+#headshot-img {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    position: relative;
+    border: 2px solid #505050;
+    border-radius: 50%;
+    background: url("../../web-resources/headshot/default.svg") no-repeat center bottom 0;
+    background-size: 80px 80px;
+    overflow: hidden;
+    top: 40px;
+    left: 150px;
+}
+#headshot-reg{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0;
+}
+#headshot-img+span{
+    position: absolute;
+    top: 100px;
+    left: 240px;
+    width: 200px;
+}
+.form>div>div>ul{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 135px;
+}
+.form>div>div>ul>li{
+    list-style: none;
+    position: relative;
+    height: 60px;
+    left: 10px;
+}
+.form>div>div>ul>li>p{
+    position: absolute;
+    top:20px;
+    left: 70px;
+}
+.form input[type='text'], .form input[type='password']{
+    position: absolute;
+    top:15px;
+    left: 50%;
+    transform: translate(-50%);
+    width: 230px;
+    height: 30px;
+    border: 0;
+    border-radius: 15px;
+    background-color: #e0e0e0;
+    text-indent: 10px;
+}
+
+.form input[type='text']:focus, .from input[type="password"]:focus {
+    outline: none;
+    border: 2px solid #00AEEC;
+}
+
+
+
+#gender>span{
+    position: absolute;
+    top:20px;
+    left: 135px;
+}
+#gender>span>span{
+    margin-right: 20px;
+}
+.form input[type='button']{
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: #00AEEC;
+    border-radius: 20px;
+    color: #FFFFFF;
+    border: 0;
+}
+
+
+/*----------------------------*/
+.log-reg-tips{
+    position: relative;
+    width: 50%;
+    height: 40%;
+}
+.log-reg-tips>*{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    color: #FFFFFF;
+}
+.log-reg-tips>h4{
+    font-size: 20px;
+    top: 40px;
+}
+.log-reg-tips>p{
+    font-size: 12px;
+    white-space: nowrap;
+    top: 73px;
+}
+.log-reg-tips>input[type='button']{
+    border: 2px solid #FFFFFF;
+    color: #ffffff;
+}
+
+
+
