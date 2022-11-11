@@ -183,11 +183,11 @@ public class UploadVideo extends HttpServlet {
         if(!"0".equals(tagCount)) {
             String[] tags = request.getParameterValues("tags");
             String sql = """
-                    merge into TAGS
+                    merge into tags
                     USING (select ? t_name, ? t_channel from dual) t2
-                    on (TAGS.v_name = t2.t_name and tags.V_CHANNEL_ID=t2.t_channel)
+                    on (tags.v_name = t2.t_name and tags.v_channel_id=t2.t_channel)
                     when matched then
-                        update set V_COUNT=v_count+1
+                        update set v_count=v_count+1
                     when not matched then
                         insert (v_id, v_name, v_creator, v_count, v_channel_id)
                         VALUES (seq_tag_id.nextval, t2.t_name, ?, 0, t2.t_channel)

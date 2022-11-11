@@ -93,7 +93,7 @@ public class PublicFunction {
                     return null;
 
                 // 制定唯一的文件名
-                fileName = UUID.randomUUID() + fileName;
+                fileName = UUID.randomUUID().toString().replace("-", "") + fileName;
                 try {
                     // 保存到服务器
                     String sourceUrl = request.getServletContext().getRealPath("/") + "\\web-resources\\" + type + "\\" + fileName;
